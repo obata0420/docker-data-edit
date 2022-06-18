@@ -25,6 +25,7 @@ install-recommend-packages:
 init:
 	docker compose up -d --build
 	docker compose exec app composer install
+	@mkae npm
 	docker compose exec app cp .env.example .env
 	docker compose exec app php artisan key:generate
 	docker compose exec app php artisan storage:link
@@ -94,6 +95,10 @@ cache-clear:
 	docker compose exec app composer clear-cache
 	@make optimize-clear
 	docker compose exec app php artisan event:clear
+npm:
+	docker compose exec web npm install
+npm-dev:
+	docker compose exec web npm run development
 db:
 	docker compose exec db bash
 sql:
