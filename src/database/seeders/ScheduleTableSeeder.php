@@ -14,22 +14,22 @@ class ScheduleTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('posts')->insert([
+        \DB::table('schedule')->insert([
             [
                 'name' => 'モーリー',
-                'content' => '肩トレ',
+                'contents' => '肩トレ',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => 'ドンキーコング',
-                'content' => 'バナナ食う',
+                'contents' => 'バナナ食う',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'name' => '新人',
-                'content' => 'データ投入',
+                'contents' => 'データ投入',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]

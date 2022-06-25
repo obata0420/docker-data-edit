@@ -1,5 +1,6 @@
 version: "3.9"
 volumes:
+  php-fpm-socket:
   db-store:
   psysh-store:
 services:
@@ -11,6 +12,9 @@ services:
       - type: bind
         source: ./src
         target: /var/www/html
+      - type: volume
+        source: php-fpm-socket
+        target: /var/run/php-fpm
       - type: volume
         source: psysh-store
         target: /root/.config/psysh
