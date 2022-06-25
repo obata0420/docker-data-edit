@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
     Button,
     Card,
@@ -19,23 +19,39 @@ const useStyles = makeStyles((theme) => createStyles({
 //ヘッダーのコンテンツ用の配列定義
 const headerList = ['名前', 'タスク内容', '編集', '完了'];
 
-let rows = [
-    {
-        name: "モーリー",
-        content: "肩トレ",
-        editBtn: <Button color="secondary" variant="contained">編集</Button>,
-        deleteBtn: <Button color="primary" variant="contained">完了</Button>,
-    },{
-        name: "ドンキーコング",
-        content: "バナナ補給",
-        editBtn: <Button color="secondary" variant="contained">編集</Button>,
-        deleteBtn: <Button color="primary" variant="contained">完了</Button>,
-    },
-];
-
 function Home() {
     //定義したスタイルを利用するための設定
     const classes = useStyles();
+
+    // scheduleテーブルからデータ管理
+    const [schedules, setSchedule] = useState([]);
+
+    // 画面に到着したら実行
+    useEffect(() => {
+        getScheduleData();
+    },[])
+
+    const getScheduleData = () => {
+        axios
+            .get('/api/schedules')
+            .then(response => {
+                setSchedule(response.data);
+                console.log(response.data);
+            })
+            .catch(() => {
+                console.log('APIとの通信に失敗しました');
+            });
+    }
+
+    let rows = [];
+    schedules.map((schedule) =>
+        rows.push({
+            name: schedule.name,
+            contents: schedule.contents,
+            editBtn: <Button color="secondary" variant="contained">編集</Button>,
+            deleteBtn: <Button color="primary" variant="contained">完了</Button>,
+        })
+    );
 
     return (
         <div className="container">
