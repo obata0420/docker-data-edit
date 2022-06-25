@@ -14,7 +14,7 @@ class ScheduleTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('schedule')->insert([
+        \DB::table('schedules')->insert([
             [
                 'name' => 'モーリー',
                 'contents' => '肩トレ',
