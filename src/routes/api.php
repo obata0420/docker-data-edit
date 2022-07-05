@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'api'], function(){
     Route::get('schedules', [App\Http\Controllers\Api\ScheduleController::class, 'index']);
     Route::post('schedules/create', [App\Http\Controllers\Api\ScheduleController::class, 'create']);
+    Route::post('schedules/edit', [App\Http\Controllers\Api\ScheduleController::class, 'edit']);
+    Route::post('schedules/update', [App\Http\Controllers\Api\ScheduleController::class, 'update']);
+    Route::post('schedules/delete', [App\Http\Controllers\Api\ScheduleController::class, 'delete']);
 });
 
 

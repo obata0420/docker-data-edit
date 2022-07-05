@@ -12,7 +12,7 @@ class ScheduleController extends Controller
     public function index()
     {
         $schedules = Schedule::all();
-        return response()->json($schedules, 200);
+        return $schedules;
     }
 
     // 新規データ登録
@@ -22,6 +22,33 @@ class ScheduleController extends Controller
         $schedule->name = $request->name;
         $schedule->contents = $request->contents;
         $schedule->save();
-        return response()->json($schedule, 200);
+        return $schedule;
+    }
+
+    // 編集画面
+    public function edit(Request $request)
+    {
+        $schedule = Schedule::find($request->id);
+        return $schedule;
+    }
+
+    // 更新処理
+    public function update(Request $request)
+    {
+        $schedule = Schedule::find($request->id);
+        $schedule->name = $request->name;
+        $schedule->contents = $request->contents;
+        $schedule->save();
+        $schedules = Schedule::all();
+        return $schedules;
+    }
+
+    // 削除処理
+    public function delete(Request $request)
+    {
+        $schedule = Schedule::find($request->id);
+        $schedule->delete();
+        $schedule = Schedule::all();
+        return $schedule;
     }
 }

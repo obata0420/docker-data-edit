@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => createStyles({
 //ヘッダーのコンテンツ用の配列定義
 const headerList = ['名前', 'タスク内容', '編集', '完了'];
 
-function Home() {
+function Schedule() {
     //定義したスタイルを利用するための設定
     const classes = useStyles();
 
@@ -69,6 +69,19 @@ function Home() {
             });
     }
 
+    const deletePost = async (schedule) => {
+        await axios
+            .post('/api/schedules/delete', {
+            id: schedule.id
+        })
+        .then((res) => {
+            setSchedule(res.data);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     // 入力されたら都度値を変更
     const inputChange = (e) => {
         const key = e.target.name;
@@ -83,8 +96,8 @@ function Home() {
         rows.push({
             name: schedule.name,
             contents: schedule.contents,
-            editBtn: <Button color="secondary" variant="contained">編集</Button>,
-            deleteBtn: <Button color="primary" variant="contained">完了</Button>,
+            editBtn: <Button color="secondary" variant="contained" key={schedule.id} href={`/schedule/edit/${schedule.id}`}>編集</Button>,
+            deleteBtn: <Button color="primary" variant="contained" href="/" onClick={() => deletePost(schedule)}>完了</Button>,
         })
     );
 
@@ -108,4 +121,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default Schedule;
