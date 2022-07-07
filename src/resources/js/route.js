@@ -10,6 +10,7 @@ function App() {
         <Routes>
             <Route path="/example" element={<Example />} />
             <Route path='/' element={<Home />} />
+            <Route path="/schedule/edit/" element={<ScheduleEdit />} />
             <Route path="/schedule/edit/:id" element={<ScheduleEdit />} />
         </Routes>
     );

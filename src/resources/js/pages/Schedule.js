@@ -7,7 +7,6 @@ import {
     createStyles,
 } from '@material-ui/core';
 import MainTable from '../components/MainTable';
-import ScheduleFrom from '../components/ScheduleForm';
 
 //スタイルの定義
 const useStyles = makeStyles((theme) => createStyles({
@@ -27,9 +26,6 @@ function Schedule() {
     // scheduleテーブルからデータ管理
     const [schedules, setSchedule] = useState([]);
 
-    // フォームの入力値を管理
-    const [formData, setFormData] = useState({name:'', contents:''});
-
     // 画面に到着したら実行
     useEffect(() => {
         getScheduleData();
@@ -47,28 +43,6 @@ function Schedule() {
             });
     }
 
-    const createPost = async() => {
-        //空の場合弾く
-        if(formData == ''){
-            return;
-        }
-        await axios
-            .post('/api/schedules/create', {
-                name: formData.name,
-                contents: formData.contents
-            })
-            .then((res) => {
-                //戻り値をtodosにセット
-                const tempSchedules = schedules;
-                tempSchedules.push(res.data);
-                setSchedule(tempSchedules);
-                setFormData('');
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
     const deletePost = async (schedule) => {
         await axios
             .post('/api/schedules/delete', {
@@ -80,15 +54,6 @@ function Schedule() {
         .catch(error => {
             console.log(error);
         });
-    }
-
-    // 入力されたら都度値を変更
-    const inputChange = (e) => {
-        const key = e.target.name;
-        const value = e.target.value;
-        formData[key] = value;
-        let data = Object.assign({}, formData);
-        setFormData(data);
     }
 
     let rows = [];
@@ -108,7 +73,7 @@ function Schedule() {
                     <div className="card">
                         <h1>タスク管理</h1>
                         <Card className={classes.card}>
-                            <ScheduleFrom data={formData} inputChange={inputChange} btnFunc={createPost} />
+                            <Button color="secondary" variant="contained" href='/schedule/edit/'>スケジュール登録</Button>
                         </Card>
                         <Card className={classes.card}>
                             {/* テーブル部分の定義 */}

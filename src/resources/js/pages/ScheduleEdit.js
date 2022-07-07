@@ -20,8 +20,28 @@ function ScheduleEdit() {
     const [editData, setEditData] = useState({name:'', contents:''});
 
     useEffect(() => {
-        getEditData();
+        if(params.id){
+            getEditData();
+        }
     }, [])
+
+    const createSchedule = async() => {
+        //空の場合弾く
+        if(editData == ''){
+            return;
+        }
+        await axios
+            .post('/api/schedules/create', {
+                name: editData.name,
+                contents: editData.contents
+            })
+            .then((res) => {
+                setEditData(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
     function getEditData(){
         axios
@@ -67,9 +87,17 @@ function ScheduleEdit() {
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card">
-                        <h1>タスク編集</h1>
+                        {params.id ? 
+                            <h1>タスク編集</h1>
+                        :
+                            <h1>タスク登録</h1>
+                        }
                         <Card className={classes.card}>
-                            <ScheduleFrom data={editData}  inputChange={inputChange} btnFunc={updateSchedule} />
+                            {params.id ?
+                                <ScheduleFrom data={editData}  inputChange={inputChange} btnFunc={updateSchedule} />
+                            :
+                                <ScheduleFrom data={editData}  inputChange={inputChange} btnFunc={createSchedule} />
+                            }
                         </Card>
                     </div>
                 </div>
