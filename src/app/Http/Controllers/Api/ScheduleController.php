@@ -9,10 +9,15 @@ use App\Models\Schedule;
 class ScheduleController extends Controller
 {
     //一覧を表示
-    public function index()
+    public function index(Request $request)
     {
-        $schedules = Schedule::all();
-        return $schedules;
+        $schedule = new Schedule;
+        if(isset($request->name) && strlen($request->name) > 0){
+            $schedule_list = $schedule->where('name', 'like', '%'.$request->name.'%')->orderBy('id', 'desc')->get();
+        }else{
+            $schedule_list = $schedule->orderBy('id', 'desc')->get();
+        }
+        return $schedule_list;
     }
 
     // 新規データ登録

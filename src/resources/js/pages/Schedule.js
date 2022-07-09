@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import {
     Button,
     Card,
+    TextField,
     makeStyles,
     createStyles,
 } from '@material-ui/core';
@@ -23,8 +25,17 @@ function Schedule() {
     //定義したスタイルを利用するための設定
     const classes = useStyles();
 
+    const search = useLocation().search;
+    const query = new URLSearchParams(search);
+    let name_para = '';
+    if(query.get('name')){
+        name_para = query.get('name');
+    }
+
     // scheduleテーブルからデータ管理
     const [schedules, setSchedule] = useState([]);
+
+    const [nameVal, setName] = useState(name_para);
 
     // 画面に到着したら実行
     useEffect(() => {
@@ -33,10 +44,13 @@ function Schedule() {
 
     const getScheduleData = () => {
         axios
-            .get('/api/schedules')
+            .get('/api/schedules', {
+                params: {
+                    name: name_para
+                }
+            })
             .then(response => {
                 setSchedule(response.data);
-                console.log(response.data);
             })
             .catch(() => {
                 console.log('APIとの通信に失敗しました');
@@ -56,6 +70,10 @@ function Schedule() {
         });
     }
 
+    const nameCange = (e) => {
+        setName(e.target.value);
+    }
+
     let rows = [];
     schedules.map((schedule) =>
         rows.push({
@@ -73,6 +91,11 @@ function Schedule() {
                     <div className="card">
                         <h1>タスク管理</h1>
                         <Card className={classes.card}>
+                            <form>
+                                <TextField id="name" label="タスク名" variant="outlined" className={classes.textArea} name="name" onChange={nameCange} value={nameVal} />
+                                <Button color="primary" variant="contained" href={`/?name=${nameVal}`}>検索</Button>
+                            </form>
+                            <Button color="inherit" variant="contained" href='/'>リセット</Button>
                             <Button color="secondary" variant="contained" href='/schedule/edit/'>スケジュール登録</Button>
                         </Card>
                         <Card className={classes.card}>
