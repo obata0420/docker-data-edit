@@ -15,6 +15,13 @@ const useStyles = makeStyles((theme) => createStyles({
     card: {
         margin: theme.spacing(5),
         padding: theme.spacing(3),
+    },
+    textArea: {
+        marginRight: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    },
+    button: {
+        marginRight: theme.spacing(1),
     }
 }));
 
@@ -93,9 +100,9 @@ function Schedule() {
                         <Card className={classes.card}>
                             <form>
                                 <TextField id="name" label="タスク名" variant="outlined" className={classes.textArea} name="name" onChange={nameCange} value={nameVal} />
-                                <Button color="primary" variant="contained" href={`/?name=${nameVal}`}>検索</Button>
+                                <Button  className={classes.button} color="primary" variant="contained" href={`/?name=${nameVal}`}>検索</Button>
+                                <Button color="inherit" variant="contained" href='/'>検索リセット</Button>
                             </form>
-                            <Button color="inherit" variant="contained" href='/'>リセット</Button>
                             <Button color="secondary" variant="contained" href='/schedule/edit/'>スケジュール登録</Button>
                         </Card>
                         <Card className={classes.card}>

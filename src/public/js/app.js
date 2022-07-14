@@ -19905,6 +19905,9 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["defaul
   return (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["default"])({
     textArea: {
       marginRight: theme.spacing(2)
+    },
+    button: {
+      marginRight: theme.spacing(1)
     }
   });
 });
@@ -19933,18 +19936,19 @@ function ScheduleFrom(props) {
       value: data.contents,
       onChange: inputChange
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      color: "primary",
+      variant: "contained",
+      href: "/",
+      onClick: btnFunc,
+      children: "\u767B\u9332"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      className: classes.button,
       color: "inherit",
       variant: "contained",
       onClick: function onClick() {
         return navigate(-1);
       },
       children: "\u623B\u308B"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      color: "primary",
-      variant: "contained",
-      href: "/",
-      onClick: btnFunc,
-      children: "\u767B\u9332"
     })]
   });
 }
@@ -20008,6 +20012,13 @@ var useStyles = (0,_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"])(fu
     card: {
       margin: theme.spacing(5),
       padding: theme.spacing(3)
+    },
+    textArea: {
+      marginRight: theme.spacing(2),
+      marginBottom: theme.spacing(2)
+    },
+    button: {
+      marginRight: theme.spacing(1)
     }
   });
 }); //ヘッダーのコンテンツ用の配列定義
@@ -20129,16 +20140,17 @@ function Schedule() {
                 onChange: nameCange,
                 value: nameVal
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                className: classes.button,
                 color: "primary",
                 variant: "contained",
                 href: "/?name=".concat(nameVal),
                 children: "\u691C\u7D22"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                color: "inherit",
+                variant: "contained",
+                href: "/",
+                children: "\u691C\u7D22\u30EA\u30BB\u30C3\u30C8"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
-              color: "inherit",
-              variant: "contained",
-              href: "/",
-              children: "\u30EA\u30BB\u30C3\u30C8"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__["default"], {
               color: "secondary",
               variant: "contained",
