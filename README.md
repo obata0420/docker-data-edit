@@ -1,11 +1,11 @@
 # 初期セットアップ
 ```
-$ git clone https://github.com/ucan-lab/docker-laravel.git
-$ cd docker-laravel
+$ git clone https://github.com/obata0420/docker-data-edit.git
+$ cd docker-data-edit
 ```
 # 初期コンテナ構築
 ```
-$ make create-project
+$ make init
 ```
 
 # コンテナの構成
