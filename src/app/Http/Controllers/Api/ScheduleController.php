@@ -12,9 +12,9 @@ class ScheduleController extends Controller
     public function index(Request $request)
     {
         $schedule = new Schedule;
-        if(isset($request->name) && strlen($request->name) > 0){
+        if (isset($request->name) && strlen($request->name) > 0) {
             $schedule_list = $schedule->where('name', 'like', '%'.$request->name.'%')->orderBy('id', 'desc')->get();
-        }else{
+        } else {
             $schedule_list = $schedule->orderBy('id', 'desc')->get();
         }
         return $schedule_list;
